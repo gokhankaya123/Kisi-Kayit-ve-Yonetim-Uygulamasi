@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModal">
+ Kişi Ekle
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Kişi Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Index" method="post">
+                    <input type="hidden" name="Kisi_ID" />
+                    <input type="text" placeholder="Tam Adınız" class="form-control mb-2" name="Kisi_FullName" />
+                    <button class="btn btn-success" type="submit">Kişi Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<table class="table table table-striped table-hover">
+
+    @foreach (var item in ViewBag.KisiListe as List<Kisiler>)
+    {
+    <tr>
+        <td>@item.Kisi_FullName</td>
+        <td><a class="btn btn-info"asp-action="Kisi_Guncelle"asp-route-id="item.Kisi_ID">Kisi Güncelle</a></td>
+        <td><a class="btn btn-danger" asp-action="Kişi_Sil" asp-route-id="@item.Kisi_ID">Sil</a></td>
+    </tr>
+    }
+
+</table>
